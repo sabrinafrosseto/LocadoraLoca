@@ -1,3 +1,4 @@
+using LocadoraLoca.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Pomelo.EntityFrameworkCore.MySql;
+using Microsoft.EntityFrameworkCore;
 
 namespace LocadoraLoca
 {
@@ -26,6 +29,10 @@ namespace LocadoraLoca
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddScoped<>
+
+            var cs = "Server=localhost;Database=locadoraloca;Uid=root;Pwd=123456;";
+            services.AddDbContext<LocadoraContext>(o => o.UseMySql(cs, null));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
